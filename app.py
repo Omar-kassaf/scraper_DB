@@ -126,7 +126,7 @@ def show_email_input_page():
         return
 
     # Block new requests for the current user if a task is still in progress
-    if is_task_in_progress(st.session_state["username"]):
+    if is_task_in_progress(st.session_state["username"], st.session_state.get("task_id", "")):
         st.warning(f"A task is already running for {st.session_state['username']}. Please wait until it is complete.")
         return
 
