@@ -18,6 +18,8 @@ credentials = service_account.Credentials.from_service_account_info(
 )
 
 db = firestore.Client(credentials=credentials, project="rfp-scraping-438613")
+if "task_id" not in st.session_state:
+    st.session_state["task_id"] = ""
 
 load_dotenv()
 # Save progress to a file for each user
@@ -39,8 +41,8 @@ def check_credentials(username, password):
     return username in user_data and user_data[username]["password"] == password
 
 # Function to check if the current user's task is complete
-def check_user_task(username):
-    progress = load_user_progress_from_firestore(username)
+def check_user_task(username, task_id):
+    progress = load_user_progress_from_firestore(username, task_id)
     return not progress.get("task_complete", True)
 
 # Save task progress
