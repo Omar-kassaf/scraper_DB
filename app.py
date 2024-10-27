@@ -12,8 +12,9 @@ from send_email_without_results import *
 from google.cloud import firestore
 from google.oauth2 import service_account
 
-credentials = service_account.Credentials.from_service_account_file(
-    '/app/rfp-scraping-438613-1c1b46883105.json'
+credentials_json = os.getenv("GOOGLE_CREDENTIALS_JSON")
+credentials = service_account.Credentials.from_service_account_info(
+    json.loads(credentials_json)
 )
 
 db = firestore.Client(credentials=credentials, project="rfp-scraping-438613")
