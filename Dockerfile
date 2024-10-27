@@ -36,7 +36,7 @@ RUN pip install google-cloud-firestore
 
 
 # Copy the service account key file into the image
-COPY rfp-scraping-438613-1c1b46883105.json /app/
+#COPY rfp-scraping-438613-1c1b46883105.json /app/
 
 # Copy the application code into the container
 COPY . .
